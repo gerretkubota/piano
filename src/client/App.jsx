@@ -1,9 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-export default class App extends Component {
-  render() {
-    return(
-      <div><h2>This is the App.jsx file</h2></div>
-    )
-  }
-}
+import AppContainer from './containers/AppContainer.jsx';
+
+const App = () => (
+  <div>
+    <AppContainer />
+  </div>
+);
+
+export default App;
