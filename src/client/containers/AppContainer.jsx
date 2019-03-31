@@ -15,7 +15,15 @@ export default class AppContainer extends Component {
     }
   }
 
-  handleClick = wkey => {}
+  handleClick = wKey => {
+    console.log('clicked');
+    let { lastSelected } = this.state;
+
+    if (lastSelected !== wKey) lastSelected = wKey;
+    else lastSelected = ''
+
+    this.setState({ lastSelected });
+  }
   
   handlePlay = () => {}
   
@@ -26,7 +34,8 @@ export default class AppContainer extends Component {
       <div className='app-container'>
         <KeyboardContainer
           keys={keys}
-          lastSelected={lastSelected} />
+          lastSelected={lastSelected}
+          handleClick={this.handleClick} />
           {/* FormContainer */}
           {/* LogContainer */}
       </div>
