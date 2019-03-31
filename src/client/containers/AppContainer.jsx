@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import KeyboardContainer from './KeyboardContainer.jsx';
+import FormContainer from './FormContainer.jsx';
 
 export default class AppContainer extends Component {
   constructor() {
@@ -17,18 +18,35 @@ export default class AppContainer extends Component {
   }
 
   handleClick = wKey => {
-    let { lastSelected } = this.state;
+    let { lastSelected, userLog } = this.state;
 
-    if (lastSelected !== wKey) lastSelected = wKey;
-    else lastSelected = ''
+    if (lastSelected !== wKey) {
+      lastSelected = wKey;
+      userLog += (lastSelected + '\n');
+    } else {
+      lastSelected = ''
+    }
 
-    this.setState({ lastSelected });
+    this.setState({ lastSelected, userLog });
+  }
+
+  handleChange = event => {
+    let userInput = event.target.value;
+    this.setState({ userInput });
   }
   
-  handlePlay = () => {}
+  handlePlay = event => {
+    event.stopPropagation();
+    console.log('play button pressed!');
+    let { userLog, userInput, lastSelected } = this.state;
+    userLog += (userInput + '\n');
+    userInput = '';
+    lastSelected = ''
+    this.setState({ userLog, userInput, lastSelected });
+  }
   
   render() {
-    const { keys, lastSelected, userInput, blackKeys } = this.state;
+    const { keys, lastSelected, userInput, blackKeys, userLog} = this.state;
 
     return (
       <div className='app-container'>
@@ -37,8 +55,12 @@ export default class AppContainer extends Component {
           lastSelected={lastSelected}
           handleClick={this.handleClick}
           blackKeys={blackKeys} />
-          {/* FormContainer */}
-          {/* LogContainer */}
+        {/* LogContainer */}
+        <FormContainer 
+          userInput={userInput}
+          handleChange={this.handleChange}
+          handlePlay={this.handlePlay}
+          userLog={userLog} />
       </div>
     )
   }
