@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+// import 'babel-polyfill' from 
 
 import KeyboardContainer from './KeyboardContainer.jsx';
 import FormContainer from './FormContainer.jsx';
@@ -32,17 +33,42 @@ export default class AppContainer extends Component {
 
   handleChange = event => {
     let userInput = event.target.value;
+    userInput = userInput.toUpperCase();
+    // WORK ON REGEX LOGIC
+
+    // let inputSequence = userInput.split(',');
+    // userInput = '';
+    // userInput.match(/^([cdefgabCDEFGAB][,])+([cdefgabCDEFGAB])$/)
+    // if (/^[CDEFGABcdefgab,]*$/) {
+    //   userInput.toUpperCase();
+    //   inputSequence = userInput.split(',');
+    // } else {
+    //   userInput = '';
+    //   console.error('Enter correct format');
+    // }
+
+
     this.setState({ userInput });
   }
+
+  handleSequence = (inputSequence) => {
+    if (inputSequence.length > 0 && inputSequence) {
+      setTimeout(() => {
+        let lastSelected = inputSequence[0];
+        this.setState({ lastSelected }, () => {
+          this.handleSequence(inputSequence.slice(1));
+        })
+      }, 1000);
+    }
+  }
   
-  handlePlay = event => {
+  handlePlay = async (event) => {
     event.stopPropagation();
-    console.log('play button pressed!');
+
     let { userLog, userInput, lastSelected } = this.state;
-    userLog += (userInput + '\n');
-    userInput = '';
-    lastSelected = ''
-    this.setState({ userLog, userInput, lastSelected });
+
+    let inputSequence = userInput.split(',');
+    await this.handleSequence(inputSequence);
   }
   
   render() {
