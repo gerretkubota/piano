@@ -32,8 +32,8 @@ export default class AppContainer extends Component {
   }
 
   handleChange = event => {
-    let userInput = event.target.value;
-    userInput = userInput.toUpperCase();
+    // let userInput = event.target.value;
+    // userInput = userInput.toUpperCase();
     // WORK ON REGEX LOGIC
 
     // let inputSequence = userInput.split(',');
@@ -48,27 +48,46 @@ export default class AppContainer extends Component {
     // }
 
 
-    this.setState({ userInput });
+    // this.setState({ userInput });
+
+  }
+
+  checkInput = (str) => {
+    if (str.length === 1) {
+      return str.match(/^[CDEFGABcdefgab]$/);
+    } else {
+      return str.match(/^([CDEFGABcdefgab],)+[CDEFGABcdefgab]$/);
+    }
   }
 
   handleSequence = (inputSequence) => {
-    if (inputSequence.length > 0 && inputSequence) {
-      setTimeout(() => {
-        let lastSelected = inputSequence[0];
+    setTimeout(() => {
+      let lastSelected = '';
+
+      if (inputSequence.length > 0 && inputSequence) {
+        lastSelected = inputSequence[0];
         this.setState({ lastSelected }, () => {
-          this.handleSequence(inputSequence.slice(1));
+          setTimeout(() => {
+            this.setState({ lastSelected: '' }, () => {
+              this.handleSequence(inputSequence.slice(1));
+            });
+          }, 1000)
         })
-      }, 1000);
-    }
+      }
+    }, 500);
   }
   
   handlePlay = async (event) => {
     event.stopPropagation();
 
-    let { userLog, userInput, lastSelected } = this.state;
+    let { userLog, userInput } = this.state;
+    let inputSequence = userInput.split(',')
 
-    let inputSequence = userInput.split(',');
     await this.handleSequence(inputSequence);
+
+    userLog += `${userInput}\n`;
+    userInput = '';
+    this.setState({ userLog, userInput });
   }
   
   render() {
