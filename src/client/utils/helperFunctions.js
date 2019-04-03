@@ -11,10 +11,17 @@ export const checkInput = userInput => {
     return userInput.match(/^([CDEFGAB],)+[CDEFGAB]$/);
   }
 };
-
+/**
+ * 
+ * @param {array} userLog 
+ * @param {string} userInput 
+ * userLog will only save 20 entries
+ * userLog will starting deleting its first element when the entry is 20
+ * new entries will be pushed to the back of userLog
+ */
 export const adjustLog = (userLog, userInput) => {
   if (userLog.length === 20) {
     userLog.shift();
   }
   userLog.push(userInput);
-}
+};

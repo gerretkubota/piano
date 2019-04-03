@@ -24,10 +24,6 @@ export default class AppContainer extends Component {
 
     if (lastSelected !== wKey) {
       lastSelected = wKey;
-      // userLog += (lastSelected + '\n');
-      // if userLog length is > 20 shift? to remove head
-      // and then push the value to the array
-      // userLog.push(lastSelected);
       adjustLog(userLog, lastSelected);
     } else {
       lastSelected = '';
@@ -69,7 +65,6 @@ export default class AppContainer extends Component {
   
         await this.handleSequence(inputSequence);
     
-        // userLog += `${userInput}\n`;
         adjustLog(userLog, userInput);
         userInput = '';
         this.setState({ userLog, userInput });

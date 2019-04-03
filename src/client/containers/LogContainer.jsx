@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 const LogContainer = ({ userLog }) => (
   <div className='log-container'>
     <ul>
-      {userLog.map(input => <li>{input}</li>)}
+      {userLog.map((input, index) => <li key={`${input}${index}`}>{input}</li>)}
     </ul>
   </div>
 );
