@@ -4,7 +4,7 @@ import KeyboardContainer from './KeyboardContainer.jsx';
 import FormContainer from './FormContainer.jsx';
 import LogContainer from './LogContainer.jsx';
 
-import { checkInput } from '../utils/helperFunctions.js';
+import { checkInput, adjustLog } from '../utils/helperFunctions.js';
 export default class AppContainer extends Component {
   constructor() {
     super();
@@ -14,7 +14,7 @@ export default class AppContainer extends Component {
       blackKeys: ['c-sharp', 'd-sharp', 'f-sharp', 'g-sharp', 'a-sharp'],
       lastSelected: '',
       userInput: '',
-      userLog: '',
+      userLog: [],
       inputSequence: [],
     }
   }
@@ -24,7 +24,11 @@ export default class AppContainer extends Component {
 
     if (lastSelected !== wKey) {
       lastSelected = wKey;
-      userLog += (lastSelected + '\n');
+      // userLog += (lastSelected + '\n');
+      // if userLog length is > 20 shift? to remove head
+      // and then push the value to the array
+      // userLog.push(lastSelected);
+      adjustLog(userLog, lastSelected);
     } else {
       lastSelected = '';
     }
@@ -65,7 +69,8 @@ export default class AppContainer extends Component {
   
         await this.handleSequence(inputSequence);
     
-        userLog += `${userInput}\n`;
+        // userLog += `${userInput}\n`;
+        adjustLog(userLog, userInput);
         userInput = '';
         this.setState({ userLog, userInput });
       } else {
