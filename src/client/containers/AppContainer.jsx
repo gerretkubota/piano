@@ -4,7 +4,12 @@ import KeyboardContainer from './KeyboardContainer.jsx';
 import FormContainer from './FormContainer.jsx';
 import LogContainer from './LogContainer.jsx';
 
-import { checkInput, adjustLog } from '../utils/helperFunctions.js';
+import {
+  checkInput,
+  adjustLog,
+  adjustScroll,
+} from '../utils/helperFunctions.js';
+
 export default class AppContainer extends Component {
   constructor() {
     super();
@@ -16,7 +21,7 @@ export default class AppContainer extends Component {
       userInput: '',
       userLog: [],
       inputSequence: [],
-    }
+    };
   }
 
   handleClick = wKey => {
@@ -29,13 +34,15 @@ export default class AppContainer extends Component {
       lastSelected = '';
     }
 
-    this.setState({ lastSelected, userLog });
-  }
+    this.setState({ lastSelected, userLog }, () =>
+      adjustScroll('log-container')
+    );
+  };
 
   handleChange = event => {
-    let userInput = (event.target.value).toUpperCase();
+    const userInput = event.target.value.toUpperCase();
     this.setState({ userInput });
-  }
+  };
 
   handleSequence = inputSequence => {
     setTimeout(() => {
@@ -44,55 +51,59 @@ export default class AppContainer extends Component {
       if (inputSequence.length > 0 && inputSequence) {
         lastSelected = inputSequence[0];
         this.setState({ lastSelected }, () => {
+          adjustScroll('log-container');
           setTimeout(() => {
             this.setState({ lastSelected: '' }, () => {
               this.handleSequence(inputSequence.slice(1));
             });
-          }, 1000)
-        })
+          }, 1000);
+        });
       }
     }, 500);
-  }
-  
-  handlePlay = async (event) => {
+  };
+
+  handlePlay = async event => {
     event.stopPropagation();
 
     let { userLog, userInput } = this.state;
 
     try {
       if (checkInput(userInput)) {
-        let inputSequence = userInput.split(',');
-  
+        const inputSequence = userInput.split(',');
+
         await this.handleSequence(inputSequence);
-    
+
         adjustLog(userLog, userInput);
         userInput = '';
-        this.setState({ userLog, userInput });
+        this.setState({ userLog, userInput }, () =>
+          adjustScroll('log-container')
+        );
       } else {
         throw new Error('Enter correct format of: C,D,...');
       }
     } catch (err) {
       console.error(err);
     }
-  }
-  
+  };
+
   render() {
-    const { keys, lastSelected, userInput, blackKeys, userLog} = this.state;
+    const { keys, lastSelected, userInput, blackKeys, userLog } = this.state;
 
     return (
-      <div className='app-container'>
+      <div className="app-container">
         <KeyboardContainer
           keys={keys}
           lastSelected={lastSelected}
           handleClick={this.handleClick}
-          blackKeys={blackKeys} />
-        <LogContainer 
-          userLog={userLog} />
-        <FormContainer 
+          blackKeys={blackKeys}
+        />
+        <LogContainer userLog={userLog} />
+        <FormContainer
           userInput={userInput}
           handleChange={this.handleChange}
-          handlePlay={this.handlePlay} />
+          handlePlay={this.handlePlay}
+        />
       </div>
-    )
+    );
   }
 }

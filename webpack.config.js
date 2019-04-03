@@ -5,7 +5,7 @@ module.exports = {
   entry: path.resolve(__dirname, './src/client/index.js'),
   output: {
     path: path.resolve(__dirname, './build'),
-    filename: 'webpack-bundle.js'
+    filename: 'webpack-bundle.js',
   },
   module: {
     rules: [
@@ -14,34 +14,34 @@ module.exports = {
         exclude: /node_modules/,
         loader: 'babel-loader',
         query: {
-          presets: [ 
+          presets: [
             [
-              '@babel/preset-env', 
+              '@babel/preset-env',
               {
-                'targets': {
-                  'node': '10'
-                }
-              }
-            ], 
-            '@babel/preset-react'
+                targets: {
+                  node: '10',
+                },
+              },
+            ],
+            '@babel/preset-react',
           ],
-          plugins: ['@babel/plugin-proposal-class-properties']
-        }
+          plugins: ['@babel/plugin-proposal-class-properties'],
+        },
       },
       {
         test: /\.css?$/,
         exclude: /node_modules/,
-        loaders: ['style-loader', 'css-loader']
-      }
-    ]
+        loaders: ['style-loader', 'css-loader'],
+      },
+    ],
   },
   plugins: [
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, './src/client/public/index.html'),
-      inject: 'body'
-    })
+      inject: 'body',
+    }),
   ],
   devServer: {
-    contentBase: path.resolve(__dirname, './src/')
-  }
-}
+    contentBase: path.resolve(__dirname, './src/'),
+  },
+};
