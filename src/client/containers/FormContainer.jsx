@@ -1,13 +1,11 @@
 import React from 'react';
 
-const FormContainer = ({ userInput, handleChange, handlePlay, userLog }) => (
+const FormContainer = ({ userInput, handleChange, handlePlay }) => (
   <div className='form-container'>
     <input type='text' 
            value={userInput} 
            onChange={handleChange} />
     <button onClick={handlePlay}>PLAY</button>
-    {/* testing to see if the userlog will display correct userInput + prev */}
-    {userLog} 
   </div>
 );
 

@@ -28,6 +28,16 @@
 }
 /* End of Keyboard Container */
 
+/* Log Container */
+.log-container {
+  max-width: 420px;
+  max-height: 50vh;
+  border: 1px solid #111;
+
+  overflow: scroll;
+}
+/* End Of Log Container */
+
 
 /* White Key */
 .white-key {

@@ -5,12 +5,14 @@ import BlackKey from '../components/BlackKey.jsx';
 
 const KeyboardContainer = ({ keys, lastSelected, handleClick, blackKeys }) => (
   <div className='keyboard-container'>
-    {keys.map(key => <WhiteKey 
-                        wKey={key} 
-                        lastSelected={lastSelected}
-                        handleClick={handleClick} />)}
+    {keys.map(key => (
+      <WhiteKey 
+        key={key}
+        wKey={key} 
+        lastSelected={lastSelected}
+        handleClick={handleClick} />))}
     
-    {blackKeys.map(key => <BlackKey bKeyPos={key} />)}
+    {blackKeys.map(key => <BlackKey key={key} bKeyPos={key} />)}
   </div>
 );
 

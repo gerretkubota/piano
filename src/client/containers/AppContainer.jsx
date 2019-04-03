@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-// import 'babel-polyfill' from 
 
 import KeyboardContainer from './KeyboardContainer.jsx';
 import FormContainer from './FormContainer.jsx';
+import LogContainer from './LogContainer.jsx';
 
+import { checkInput } from '../utils/helperFunctions.js';
 export default class AppContainer extends Component {
   constructor() {
     super();
@@ -25,42 +26,18 @@ export default class AppContainer extends Component {
       lastSelected = wKey;
       userLog += (lastSelected + '\n');
     } else {
-      lastSelected = ''
+      lastSelected = '';
     }
 
     this.setState({ lastSelected, userLog });
   }
 
   handleChange = event => {
-    // let userInput = event.target.value;
-    // userInput = userInput.toUpperCase();
-    // WORK ON REGEX LOGIC
-
-    // let inputSequence = userInput.split(',');
-    // userInput = '';
-    // userInput.match(/^([cdefgabCDEFGAB][,])+([cdefgabCDEFGAB])$/)
-    // if (/^[CDEFGABcdefgab,]*$/) {
-    //   userInput.toUpperCase();
-    //   inputSequence = userInput.split(',');
-    // } else {
-    //   userInput = '';
-    //   console.error('Enter correct format');
-    // }
-
-
-    // this.setState({ userInput });
-
+    let userInput = (event.target.value).toUpperCase();
+    this.setState({ userInput });
   }
 
-  checkInput = (str) => {
-    if (str.length === 1) {
-      return str.match(/^[CDEFGABcdefgab]$/);
-    } else {
-      return str.match(/^([CDEFGABcdefgab],)+[CDEFGABcdefgab]$/);
-    }
-  }
-
-  handleSequence = (inputSequence) => {
+  handleSequence = inputSequence => {
     setTimeout(() => {
       let lastSelected = '';
 
@@ -81,13 +58,22 @@ export default class AppContainer extends Component {
     event.stopPropagation();
 
     let { userLog, userInput } = this.state;
-    let inputSequence = userInput.split(',')
 
-    await this.handleSequence(inputSequence);
-
-    userLog += `${userInput}\n`;
-    userInput = '';
-    this.setState({ userLog, userInput });
+    try {
+      if (checkInput(userInput)) {
+        let inputSequence = userInput.split(',');
+  
+        await this.handleSequence(inputSequence);
+    
+        userLog += `${userInput}\n`;
+        userInput = '';
+        this.setState({ userLog, userInput });
+      } else {
+        throw new Error('Enter correct format of: C,D,...');
+      }
+    } catch (err) {
+      console.error(err);
+    }
   }
   
   render() {
@@ -100,12 +86,12 @@ export default class AppContainer extends Component {
           lastSelected={lastSelected}
           handleClick={this.handleClick}
           blackKeys={blackKeys} />
-        {/* LogContainer */}
+        <LogContainer 
+          userLog={userLog} />
         <FormContainer 
           userInput={userInput}
           handleChange={this.handleChange}
-          handlePlay={this.handlePlay}
-          userLog={userLog} />
+          handlePlay={this.handlePlay} />
       </div>
     )
   }
