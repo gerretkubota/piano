@@ -20,7 +20,7 @@ Interactive piano keyboard
       or
       npm run dev (to run in dev mode)
    ```
-* Step 3. Open index.html that is in the directory of: build/index.html
+* Step 3. (skip this step if running in dev mode) Open index.html that is in the directory of: build/index.html
 * Step 4. Interact
   - Click on a white key to highlight.
     - Click on the same key or different key to unhighlight.
