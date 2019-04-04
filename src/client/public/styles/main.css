@@ -30,28 +30,13 @@
 }
 /* End of Keyboard Container */
 
-.keys {
-  display: flex;
-  flex-direction: row;
-  position: relative;
-}
-
-.black-keys-container {
-  max-width: 100vw;
-  width: 100%;
-
-  z-index: 1;
-  position: relative;
-}
-
 /* Log Container */
 .log-container {
   max-width: 420px;
   width: 100%;
   height: 150px;
   padding: 5px 10px 5px 10px;
-  border: 1px solid #111;
-  font-size: 16px;
+  border: 1px solid #111111;
 
   text-align: center;
   overflow: scroll;
@@ -71,28 +56,30 @@
 
 /* Textfield */
 input[type='text'],
-#play-button {
+#play-button,
+.log-container {
   font-size: 16px;
 }
+/* End of Textfield */
 
 /* Play Button */
 #play-button {
-  width: 100px;
-
   font-weight: bold;
+  width: 100px;
 }
+/* End of Play Button */
 
 /* White Key */
 .white-key {
-  position: relative;
-  display: flex;
-  justify-content: center;
   width: 60px;
   height: 220px;
+  border-radius: 0px 0px 5px 5px;
+  display: flex;
+  justify-content: center;
+  position: relative;
 
   background-color: #fff;
   border: 1px solid #111;
-  border-radius: 0px 0px 5px 5px;
 }
 /* End of White Key */
 
@@ -103,10 +90,10 @@ input[type='text'],
   width: 100%;
   height: 100%;
   border-radius: 0px 0px 5px 5px;
-
-  background-color: #111;
   position: absolute;
   z-index: 2;
+
+  background-color: #111;
 }
 /* End of Black Key */
 
@@ -114,7 +101,6 @@ input[type='text'],
 .key-name {
   font-size: 24px;
   font-weight: bold;
-
   position: absolute;
   bottom: 20px;
 }
