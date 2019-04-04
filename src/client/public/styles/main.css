@@ -34,14 +34,36 @@
 .log-container {
   max-width: 420px;
   width: 100%;
-  height: 150px;
+  height: 200px;
+
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #111;
+}
+/* End Of Log Container */
+
+.log-text-container {
+  max-width: 420px;
+  width: 100%;
+  height: 160px;
   padding: 5px 10px 5px 10px;
-  border: 1px solid #111111;
 
   text-align: center;
   overflow: scroll;
 }
-/* End Of Log Container */
+
+/* Log Header */
+.log-header {
+  font-weight: bold;
+  height: 40px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  border-bottom: 1px solid #111;
+}
+/* End of Log Header */
 
 /* Form Container */
 .form-container {
@@ -57,10 +79,17 @@
 /* Textfield */
 input[type='text'],
 #play-button,
-.log-container {
+.log-container,
+#delete-button {
   font-size: 16px;
 }
 /* End of Textfield */
+
+#delete-button {
+  font-weight: bold;
+  width: 100px;
+  height: 30px;
+}
 
 /* Play Button */
 #play-button {
@@ -74,6 +103,7 @@ input[type='text'],
   width: 60px;
   height: 220px;
   border-radius: 0px 0px 5px 5px;
+
   display: flex;
   justify-content: center;
   position: relative;
@@ -101,6 +131,7 @@ input[type='text'],
 .key-name {
   font-size: 24px;
   font-weight: bold;
+
   position: absolute;
   bottom: 20px;
 }

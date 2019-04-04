@@ -72,7 +72,7 @@ export default class AppContainer extends Component {
       if (inputSequence.length > 0 && inputSequence) {
         lastSelected = inputSequence[0];
         this.setState({ lastSelected }, () => {
-          adjustScroll('log-container');
+          adjustScroll('log-text-container');
           setTimeout(() => {
             this.setState({ lastSelected: '' }, () => {
               this.handleSequence(inputSequence.slice(1));
@@ -106,7 +106,7 @@ export default class AppContainer extends Component {
         adjustLog(userLog, userInput);
         userInput = '';
         this.setState({ userLog, userInput }, () =>
-          adjustScroll('log-container')
+          adjustScroll('log-text-container')
         );
       } else {
         throw new Error('Enter correct format of: C,D,...');
@@ -121,7 +121,7 @@ export default class AppContainer extends Component {
 
     return (
       <div className="app-container">
-        <h1>Piano Keyboard</h1>
+        <h1>PIANO KEYBOARD</h1>
         <KeyboardContainer
           keys={keys}
           lastSelected={lastSelected}
