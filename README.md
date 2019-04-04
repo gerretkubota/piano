@@ -17,8 +17,10 @@ Interactive piano keyboard
 * Step 2. 
   ```bash
       npm run build
+      or
+      npm run dev (to run in dev mode)
    ```
-* Step 3. Open index.html
+* Step 3. Open index.html that is in the directory of: build/index.html
 * Step 4. Interact
   - Click on a white key to highlight.
     - Click on the same key or different key to unhighlight.
