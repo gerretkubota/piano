@@ -42,7 +42,7 @@ export default class AppContainer extends Component {
     }
 
     this.setState({ lastSelected, userLog }, () =>
-      adjustScroll('log-container')
+      adjustScroll('log-text-container')
     );
   };
 
@@ -116,6 +116,13 @@ export default class AppContainer extends Component {
     }
   };
 
+  handleClear = () => {
+    let { userLog, lastSelected } = this.state;
+    userLog = [];
+    lastSelected = '';
+    this.setState({ userLog, lastSelected });
+  };
+
   render() {
     const { keys, lastSelected, userInput, blackKeys, userLog } = this.state;
 
@@ -128,7 +135,7 @@ export default class AppContainer extends Component {
           handleClick={this.handleClick}
           blackKeys={blackKeys}
         />
-        <LogContainer userLog={userLog} />
+        <LogContainer userLog={userLog} handleClear={this.handleClear} />
         <FormContainer
           userInput={userInput}
           handleChange={this.handleChange}

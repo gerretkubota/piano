@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const LogContainer = ({ userLog }) => (
+const LogContainer = ({ userLog, handleClear }) => (
   <div className="log-container">
     <div className="log-header">
       <p>HISTORY LOG</p>
-      <button type="button" id="delete-button">
+      <button type="button" id="delete-button" onClick={handleClear}>
         CLEAR
       </button>
     </div>
@@ -21,6 +21,7 @@ const LogContainer = ({ userLog }) => (
 
 LogContainer.propTypes = {
   userLog: PropTypes.arrayOf(PropTypes.string),
+  handleClear: PropTypes.func,
 };
 
 export default LogContainer;
