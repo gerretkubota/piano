@@ -24,3 +24,6 @@ Interactive piano keyboard
     - Click on the same key or different key to unhighlight.
   - Enter a series of keys that you'd like to highlight, in a format of: C,D,E,F,...G and hit play!
   - Click on the clear button to clear the log container.
+
+## <strong>Author</strong>
+Gerret Kubota
