@@ -25,7 +25,7 @@ export const adjustLog = (userLog, userInput) => {
   userLog.push(userInput);
 };
 
-export const adjustScroll = divId => {
-  const logContainer = document.querySelector(`.${divId}`);
+export const adjustScroll = attr => {
+  const logContainer = document.querySelector(`.${attr}`);
   logContainer.scrollTop = logContainer.scrollHeight;
 };
