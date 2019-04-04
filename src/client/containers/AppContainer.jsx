@@ -94,7 +94,6 @@ export default class AppContainer extends Component {
    */
   handlePlay = async event => {
     event.preventDefault();
-    event.stopPropagation();
 
     let { userLog, userInput } = this.state;
 

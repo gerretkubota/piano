@@ -51,6 +51,7 @@
   height: 150px;
   padding: 5px 10px 5px 10px;
   border: 1px solid #111;
+  font-size: 16px;
 
   text-align: center;
   overflow: scroll;
@@ -59,11 +60,27 @@
 
 /* Form Container */
 .form-container {
+  width: 420px;
+  height: 40px;
+
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-around;
 }
 /* End of Form Container */
+
+/* Textfield */
+input[type='text'],
+#play-button {
+  font-size: 16px;
+}
+
+/* Play Button */
+#play-button {
+  width: 100px;
+
+  font-weight: bold;
+}
 
 /* White Key */
 .white-key {
