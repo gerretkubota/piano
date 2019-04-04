@@ -24,6 +24,13 @@ export default class AppContainer extends Component {
     };
   }
 
+  /**
+   * @param {string} wKey
+   * Check if lastSelected matches wKey, it doesn't, assign lastSelected with wKey
+   * and it should highlight corresponding key.
+   * If it doesn't match, assign empty tring to lastSelected
+   * set new state and invoke adjustScroll after the update
+   */
   handleClick = wKey => {
     let { lastSelected, userLog } = this.state;
 
@@ -39,11 +46,25 @@ export default class AppContainer extends Component {
     );
   };
 
+  /**
+   * @param {event} event
+   * Get user input from textfield and uppercase the input
+   * set new userInput to state
+   */
   handleChange = event => {
     const userInput = event.target.value.toUpperCase();
     this.setState({ userInput });
   };
 
+  /**
+   * @param {array} inputSequence
+   * Recursively highlight all the keys within inputSequence for 1 second each
+   * The outer setTimeout will apply a .5 second delay between highlighting,
+   * The first element of inputSequence will always highlight as the array will be sliced
+   * recursively. lastSelected will have the first element of the array and will update
+   * the state with lastSelected, as it is done updating it will invoke an inner setTimeout
+   * which will highlight the lastSelected key for 1 second and then reset the lastSelected to unhighlight
+   */
   handleSequence = inputSequence => {
     setTimeout(() => {
       let lastSelected = '';
@@ -62,6 +83,15 @@ export default class AppContainer extends Component {
     }, 500);
   };
 
+  /**
+   * @param {event} event
+   * Check to see if the userInput is in the correct format by calling the
+   * checkInput helper function.
+   * If valid input, split the input by ',' and store into inputSequence
+   * then asynchronously call handleSequence with the inputSequence.
+   * Invoke adjustLog after await is done, reset userInput and setState
+   * If it's not valid, alert error
+   */
   handlePlay = async event => {
     event.preventDefault();
     event.stopPropagation();
