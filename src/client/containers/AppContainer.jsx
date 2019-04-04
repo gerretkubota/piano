@@ -63,6 +63,7 @@ export default class AppContainer extends Component {
   };
 
   handlePlay = async event => {
+    event.preventDefault();
     event.stopPropagation();
 
     let { userLog, userInput } = this.state;
@@ -82,7 +83,7 @@ export default class AppContainer extends Component {
         throw new Error('Enter correct format of: C,D,...');
       }
     } catch (err) {
-      console.error(err);
+      alert(err);
     }
   };
 
@@ -91,6 +92,7 @@ export default class AppContainer extends Component {
 
     return (
       <div className="app-container">
+        <h1>Piano Keyboard</h1>
         <KeyboardContainer
           keys={keys}
           lastSelected={lastSelected}

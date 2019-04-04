@@ -7,7 +7,7 @@ const WhiteKey = ({ wKey, lastSelected, handleClick }) => (
     wkey={wKey}
     onClick={() => handleClick(wKey)}
   >
-    {wKey}
+    <span className="key-name">{wKey}</span>
   </div>
 );
 

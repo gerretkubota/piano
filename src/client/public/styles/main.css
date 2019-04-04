@@ -8,9 +8,10 @@
 
 /* App Container */
 .app-container {
+  font-family: 'Roboto';
   margin-top: 70px;
   height: 70vh;
-  
+
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -22,7 +23,7 @@
 .keyboard-container {
   max-width: 100vw;
   max-height: 50vh;
-  
+
   display: flex;
   flex-direction: row;
   position: relative;
@@ -30,16 +31,17 @@
 /* End of Keyboard Container */
 
 .keys {
-  display:flex;
+  display: flex;
   flex-direction: row;
   position: relative;
 }
 
 .black-keys-container {
-  z-index: 1;
-  position: relative;
   max-width: 100vw;
   width: 100%;
+
+  z-index: 1;
+  position: relative;
 }
 
 /* Log Container */
@@ -65,6 +67,9 @@
 
 /* White Key */
 .white-key {
+  position: relative;
+  display: flex;
+  justify-content: center;
   width: 60px;
   height: 220px;
 
@@ -76,7 +81,6 @@
 
 /* Black Key */
 .black-key {
-  /* top: 0; */
   max-width: 30px;
   max-height: 150px;
   width: 100%;
@@ -88,6 +92,16 @@
   z-index: 2;
 }
 /* End of Black Key */
+
+/* Individual white keys */
+.key-name {
+  font-size: 24px;
+  font-weight: bold;
+
+  position: absolute;
+  bottom: 20px;
+}
+/* End of individual white keys */
 
 /* Black keys (sharp keys) */
 .c-sharp {
