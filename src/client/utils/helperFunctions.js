@@ -22,7 +22,10 @@ export const adjustLog = (userLog, userInput) => {
   if (userLog.length === 20) {
     userLog.shift();
   }
+
   userLog.push(userInput);
+
+  return userLog;
 };
 
 export const adjustScroll = attr => {

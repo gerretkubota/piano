@@ -33,15 +33,15 @@ export default class AppContainer extends Component {
    */
   handleClick = wKey => {
     let { lastSelected, userLog } = this.state;
-
+    const tempArr = userLog.slice(0);
     if (lastSelected !== wKey) {
       lastSelected = wKey;
-      adjustLog(userLog, lastSelected);
+      adjustLog(tempArr, lastSelected);
     } else {
       lastSelected = '';
     }
 
-    this.setState({ lastSelected, userLog }, () =>
+    this.setState({ lastSelected, userLog: tempArr }, () =>
       adjustScroll('log-text-container')
     );
   };
@@ -100,12 +100,13 @@ export default class AppContainer extends Component {
     try {
       if (checkInput(userInput)) {
         const inputSequence = userInput.split(',');
+        const tempUserLog = userLog.splice(0);
 
         await this.handleSequence(inputSequence);
 
-        adjustLog(userLog, userInput);
+        adjustLog(tempUserLog, userInput);
         userInput = '';
-        this.setState({ userLog, userInput }, () =>
+        this.setState({ userLog: tempUserLog, userInput }, () =>
           adjustScroll('log-text-container')
         );
       } else {
@@ -117,10 +118,7 @@ export default class AppContainer extends Component {
   };
 
   handleClear = () => {
-    let { userLog, lastSelected } = this.state;
-    userLog = [];
-    lastSelected = '';
-    this.setState({ userLog, lastSelected });
+    this.setState({ userLog: [], lastSelected: '' });
   };
 
   render() {
